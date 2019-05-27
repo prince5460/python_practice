@@ -12,7 +12,7 @@ def quick_sort(arr):
     else:
         pivot = arr[0]  # 递归条件
         less = [i for i in arr[1:] if i <= pivot]  # 由所有小于基准值的元素组成的子数组
-        greater = [i for i in arr[1:] if i >= pivot]  # 由所有大于基准值的元素组成的子数组
+        greater = [i for i in arr[1:] if i > pivot]  # 由所有大于基准值的元素组成的子数组
         return quick_sort(less) + [pivot] + quick_sort(greater)
 
 
