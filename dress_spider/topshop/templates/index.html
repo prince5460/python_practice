@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>TopShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.3/dist/css/site.min.css" rel="stylesheet">
+
+    <style>
+        .job-hot {
+            position: absolute;
+            color: #d9534f;
+            right: 0;
+            top: 15px;
+        }
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon-precomposed"
+          href="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.3/dist/ico/apple-touch-icon-precomposed.png">
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/npm/@bootcss/www.bootcss.com@0.0.3/dist/ico/favicon.ico">
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+
+    </div>
+</div>
+
+
+<div class="container projects">
+
+    <div class="projects-header page-header">
+        <h2>商品列表</h2>
+        <p>数据来源：topshop</p>
+    </div>
+
+
+    <div class="row">
+        {% for item in page_data.items %}
+            <div class="col-sm-6 col-md-4 col-lg-3 ">
+                <div class="thumbnail">
+                    <img class="lazy"
+                         src="{{ item.productBaseImageUrl }}" width="300"
+                         height="150">
+
+                    <div class="caption">
+                        <h3>
+                            <a href="{{ item.seoUrl }}" title="商品名称" target="_blank">{{ item.name }}<br></a>
+                        </h3>
+                        <h3>
+                            商品价格：{{ item.unitPrice }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <nav class="text-center">
+        <ul class="pagination">
+            {% if page_data.has_prev %}
+                <li><a href="{{ url_for('index', page=page_data.prev_num) }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><a href="javscript:;">&laquo;</a></li>
+            {% endif %}
+            {% for page in page_data.iter_pages() %}
+                {% if page == page_data.page %}
+                    <li class="active"><a href="javscript:;">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('index', page=page) }}">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_data.has_next %}
+                <li><a href="{{ url_for('index', page=page_data.next_num ) }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><a href="javscript:;">&raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+</div>
+<!-- /.container -->
+</body>
+</html>

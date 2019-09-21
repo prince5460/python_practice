@@ -9,7 +9,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine('mysql://root:zhou123@localhost:3306/news?charset=utf8')
+engine = create_engine('mysql://root:zhou1234@localhost:3306/news?charset=utf8')
 Base = declarative_base()
 
 Session = sessionmaker(bind=engine)
@@ -89,12 +89,12 @@ def main():
     # else:
     #     print('Not exist.')
 
-    # rest = obj.get_more()
-    # print(rest.count())
+    rest = obj.get_more()
+    print(rest.count())
 
     # print(obj.update_data(1))
 
-    obj.delete_data(1)
+    # obj.delete_data(1)
 
 
 if __name__ == '__main__':
